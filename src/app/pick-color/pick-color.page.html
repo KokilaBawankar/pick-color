@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>pick-color</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div class="color-bar-color-none" (click)="setSelectedColor('none')">
+          <div class="line1"></div>
+        </div>
+      </ion-col>
+      <ion-col *ngFor="let color of colors">
+        <div class="color-bar" [style.background-color]="color" (click)="setSelectedColor(color)"></div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-range class="color-slider" value="0" min="-100" max="200" (ionChange)="adjustColor(selectedColor, $event)"></ion-range>
+</ion-content>
+
+<ion-footer>
+  <ion-button (click)="dismiss()">Close</ion-button>
+</ion-footer>

@@ -1,0 +1,28 @@
+.color-bar-color-none,
+.color-bar{
+  height: 50px;
+  width: 50px;
+  background-color: #f2f0f0;
+  border-radius: 50%;
+  box-shadow: 2px 3px 5px grey;
+  .line1 {
+    width: 48px;
+    height: 48px;
+    border-bottom: 2px solid #FF9800;
+    position: absolute;
+    transform: translateY(-16px) translateX(16px) rotate(40deg);
+  }
+}
+
+.color-bar-color-none{
+  background-color: #f2f0f0;
+}
+
+.color-slider{
+  --bar-height: 10px;
+  --bar-background-active: none;
+  --bar-border-radius: 5px;
+  .range-knob{
+
+  }
+}

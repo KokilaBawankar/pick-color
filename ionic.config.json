@@ -1,0 +1,7 @@
+{
+  "name": "pick-color",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
