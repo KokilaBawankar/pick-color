@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef, Renderer2, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +7,14 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  @ViewChild('button', {static: true}) button: ElementRef;
+
+  constructor(private renderer2: Renderer2) {}
 
     onClick(event) {
         console.log('***', event);
+        if (event.color) {
+          this.renderer2.setStyle(this.button.nativeElement, 'background', event.color);
+        }
     }
 }

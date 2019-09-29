@@ -1,9 +1,16 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import {
+    Component,
+    ElementRef,
+    EventEmitter,
+    OnDestroy,
+    OnInit,
+    Output,
+    Renderer2,
+    ViewChild
+} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 
-import {
-    ColorChangeModel, ColorPickerCloseModel, ColorPickerOpenModel,
-} from './pick-color.directive';
+import {ColorChangeModel, ColorPickerCloseModel, ColorPickerOpenModel} from './pick-color.directive';
 
 @Component({
     selector: 'app-pick-color',
@@ -21,8 +28,16 @@ export class PickColorPage implements OnInit, OnDestroy {
 
     colors: string[] = [];
     selectedColor: string;
+    @ViewChild('pickColorColorSlider', {static: true}) colorSlider: ElementRef;
+    colorSliderConfig = {
+        min: -100,
+        max: 100,
+        value: 0,
+        defaultBarBackground: '#e5e5e5'
+    };
 
-    constructor(private modalController: ModalController) {
+    constructor(private modalController: ModalController,
+                private renderer2: Renderer2) {
     }
 
     ngOnInit() {
@@ -39,28 +54,24 @@ export class PickColorPage implements OnInit, OnDestroy {
 
     setSelectedColor(color: string) {
         this.selectedColor = color;
+        this.setColorSliderBackgroundGradient(color);
+        // @ts-ignore
+        this.renderer2.setAttribute(this.colorSlider.el, 'value', this.colorSliderConfig.value.toString());
         this.onColorChange.emit({color});
     }
 
-    /*adjustColor(color: string, customEvent: CustomEvent) {
-        console.log(customEvent.detail.value);
-        console.log( '#' + color.replace(/^#/, '').replace(
-            /../g, clr => ('0' + Math.min(255, Math.max(0, parseInt(clr, 16) + customEvent.detail.value)).toString(16)).substr(-2)));
-    }*/
-
-    adjustColor(col: string, customEvent: CustomEvent) {
-
-        const amt = customEvent.detail.value;
+    adjustColor(color: string, customEvent?: CustomEvent, amount?: number) {
+        const amt = customEvent ? customEvent.detail.value : amount;
         let usePound = false;
 
-        if (col[0] === '#') {
-            col = col.slice(1);
+        if (color[0] === '#') {
+            color = color.slice(1);
             usePound = true;
         }
 
-        let R = parseInt(col.substring(0, 2), 16);
-        let G = parseInt(col.substring(2, 4), 16);
-        let B = parseInt(col.substring(4, 6), 16);
+        let R = parseInt(color.substring(0, 2), 16);
+        let G = parseInt(color.substring(2, 4), 16);
+        let B = parseInt(color.substring(4, 6), 16);
 
         // to make the colour less bright than the input
         // change the following three "+" symbols to "-"
@@ -90,8 +101,33 @@ export class PickColorPage implements OnInit, OnDestroy {
         const GG = ((G.toString(16).length === 1) ? '0' + G.toString(16) : G.toString(16));
         const BB = ((B.toString(16).length === 1) ? '0' + B.toString(16) : B.toString(16));
 
-        console.log((usePound ? '#' : '') + RR + GG + BB)
         return (usePound ? '#' : '') + RR + GG + BB;
 
     }
+
+    setColorSliderBackgroundGradient(color: string) {
+        if (color !== 'none') {
+            const darkColor = this.adjustColor(color, undefined, this.colorSliderConfig.min) + ' 0%,';
+            const middleolor = color + ' 50%,';
+            const lightColor = this.adjustColor(color, undefined, this.colorSliderConfig.max) + ' 100%)';
+            // 'linear-gradient(100deg, rgba(92,0,0,1) 0%, rgba(192,57,43,1) 50%, rgba(255,157,143,1) 100%)'
+            const linearGradient = 'linear-gradient(100deg, ' + darkColor + middleolor + lightColor;
+            // @ts-ignore
+            this.renderer2.setStyle(this.colorSlider.el.shadowRoot.children[1].children[0], 'background', linearGradient);
+        } else {
+            // @ts-ignore
+            this.renderer2.setStyle(this.colorSlider.el.shadowRoot.children[1].children[0],
+                              'background', this.colorSliderConfig.defaultBarBackground);
+        }
+    }
+
+    onColorSliderChange(selectedColor: string, $event: CustomEvent<any>) {
+        this.onColorChange.emit({color: this.adjustColor(selectedColor, $event)});
+    }
+
+    /*adjustColor(color: string, customEvent: CustomEvent) {
+      console.log(customEvent.detail.value);
+      console.log( '#' + color.replace(/^#/, '').replace(
+          /../g, clr => ('0' + Math.min(255, Math.max(0, parseInt(clr, 16) + customEvent.detail.value)).toString(16)).substr(-2)));
+  }*/
 }

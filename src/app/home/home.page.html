@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content>
-    <div class="ion-padding">
+    <div class="ion-padding" #button>
         The world is your oyster.
         <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will
             be your guide.</p>
@@ -15,6 +15,7 @@
 
     <ion-button
             appPickColor
+            [colors]="['#C0392B', '#E74C3C', '#9B59B6', '#8E44AD', '#2980B9', '#3498DB', '#1ABC9C', '#16A085', '#27AE60', '#2ECC71']"
             (onColorPickerOpen)="onClick($event)"
             (onColorPickerClose)="onClick($event)"
             (onColorChange)="onClick($event)">

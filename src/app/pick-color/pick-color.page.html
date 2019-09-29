@@ -1,8 +1,8 @@
-<ion-header>
+<!--<ion-header>
   <ion-toolbar>
     <ion-title>pick-color</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header>-->
 
 <ion-content>
   <ion-grid>
@@ -18,7 +18,14 @@
     </ion-row>
   </ion-grid>
 
-  <ion-range class="color-slider" value="0" min="-100" max="200" (ionChange)="adjustColor(selectedColor, $event)"></ion-range>
+  <ion-range
+          #pickColorColorSlider
+          class="color-slider"
+          [value]="colorSliderConfig.value"
+          [min]="colorSliderConfig.min"
+          [max]="colorSliderConfig.max"
+          (ionChange)="onColorSliderChange(selectedColor, $event)">
+  </ion-range>
 </ion-content>
 
 <ion-footer>
