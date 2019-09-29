@@ -45,7 +45,8 @@ export class PickColorDirective {
                 onColorPickerClose: this.onColorPickerClose,
                 onColorChange: this.onColorChange,
                 colors: this.colors
-            }
+            },
+            cssClass: 'pick-color-modal'
         });
         await modal.present();
     }
