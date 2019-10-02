@@ -1,26 +1,24 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {PickColorDirective} from './directives/pick-color.directive';
+import {PickColorModalPageModule} from './pages/pick-color-modal.module';
+import {PickColorModalPage} from './pages/pick-color-modal.page';
 
-import { IonicModule } from '@ionic/angular';
-
-import { PickColorPage } from './pick-color.page';
-
-const routes: Routes = [
-  {
-    path: '',
-    component: PickColorPage
-  }
-];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes)
-  ],
-  declarations: [PickColorPage]
+    declarations: [
+        PickColorDirective
+    ],
+    entryComponents: [
+        PickColorModalPage
+    ],
+    imports: [
+        CommonModule,
+        PickColorModalPageModule
+    ],
+    exports: [
+        PickColorDirective
+    ]
 })
-export class PickColorPageModule {}
+export class PickColorModule {
+}

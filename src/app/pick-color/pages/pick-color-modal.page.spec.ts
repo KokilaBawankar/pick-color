@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PickColorPage } from './pick-color.page';
+import { PickColorModalPage } from './pick-color-modal.page';
 
-describe('PickColorPage', () => {
-  let component: PickColorPage;
-  let fixture: ComponentFixture<PickColorPage>;
+describe('PickColorModalPage', () => {
+  let component: PickColorModalPage;
+  let fixture: ComponentFixture<PickColorModalPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PickColorPage ],
+      declarations: [ PickColorModalPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PickColorPage);
+    fixture = TestBed.createComponent(PickColorModalPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

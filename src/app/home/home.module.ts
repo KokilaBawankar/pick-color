@@ -5,7 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 
 import {HomePage} from './home.page';
-import {PickColorDirective} from '../pick-color/pick-color.directive';
+import {PickColorModule} from '../pick-color/pick-color.module';
 
 @NgModule({
     imports: [
@@ -17,9 +17,10 @@ import {PickColorDirective} from '../pick-color/pick-color.directive';
                 path: '',
                 component: HomePage
             }
-        ])
+        ]),
+        PickColorModule
     ],
-    declarations: [HomePage, PickColorDirective]
+    declarations: [HomePage]
 })
 export class HomePageModule {
 }

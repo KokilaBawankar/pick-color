@@ -10,14 +10,14 @@ import {
 } from '@angular/core';
 import {ModalController} from '@ionic/angular';
 
-import {ColorChangeModel, ColorPickerCloseModel, ColorPickerOpenModel} from './pick-color.directive';
+import {ColorChangeModel, ColorPickerCloseModel, ColorPickerOpenModel} from '../directives/pick-color.directive';
 
 @Component({
     selector: 'app-pick-color',
-    templateUrl: './pick-color.page.html',
-    styleUrls: ['./pick-color.page.scss'],
+    templateUrl: './pick-color-modal.page.html',
+    styleUrls: ['./pick-color-modal.page.scss'],
 })
-export class PickColorPage implements OnInit, OnDestroy {
+export class PickColorModalPage implements OnInit, OnDestroy {
 
     // tslint:disable-next-line:no-output-on-prefix
     @Output() onColorPickerOpen: EventEmitter<ColorPickerOpenModel> = new EventEmitter();

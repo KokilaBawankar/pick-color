@@ -1,6 +1,6 @@
 import {Directive, ElementRef, EventEmitter, HostListener, Input, Output} from '@angular/core';
 import {ModalController} from '@ionic/angular';
-import {PickColorPage} from './pick-color.page';
+import {PickColorModalPage} from '../pages/pick-color-modal.page';
 
 export interface ColorPickerOpenModel {
     isColorPickerOpen: boolean;
@@ -37,7 +37,7 @@ export class PickColorDirective {
     @HostListener('click', ['$event'])
     async openColorPicker(event) {
         const modal = await this.modalController.create({
-            component: PickColorPage,
+            component: PickColorModalPage,
             backdropDismiss: false,
             showBackdrop: true,
             componentProps: {
