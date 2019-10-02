@@ -41,6 +41,8 @@ export class PickColorModalPage implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        // @ts-ignore
+        this.renderer2.setAttribute(this.colorSlider.el, 'disabled', 'true');
         this.onColorPickerOpen.emit({isColorPickerOpen: true});
     }
 
@@ -58,6 +60,13 @@ export class PickColorModalPage implements OnInit, OnDestroy {
         // @ts-ignore
         this.renderer2.setAttribute(this.colorSlider.el, 'value', this.colorSliderConfig.value.toString());
         this.onColorChange.emit({color});
+        if (this.selectedColor === 'none') {
+            // @ts-ignore
+            this.renderer2.setAttribute(this.colorSlider.el, 'disabled', 'true');
+        } else {
+            // @ts-ignore
+            this.renderer2.setAttribute(this.colorSlider.el, 'disabled', 'false');
+        }
     }
 
     adjustColor(color: string, customEvent?: CustomEvent, amount?: number) {

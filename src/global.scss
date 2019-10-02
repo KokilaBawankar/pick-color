@@ -39,13 +39,16 @@ ion-modal {
       ion-footer{
         display: flex;
         justify-content: flex-end;
+        ion-button{
+          margin: 10px;
+        }
       }
     }
     &.pick-color-modal {
       .modal-wrapper {
-        height: 320px;
+        height: 300px;
         position: relative;
-        top: 30%;
+        top: 31%;
         transform: translateY(-50%)!important;
       }
     }
