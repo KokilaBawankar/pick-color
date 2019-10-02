@@ -14,17 +14,15 @@
         </div>
     </div>
 
-    <ion-range
-            [mode]="'ios'"
-            #pickColorColorSlider
-            class="color-slider"
-            [value]="colorSliderConfig.value"
-            [min]="colorSliderConfig.min"
-            [max]="colorSliderConfig.max"
-            (ionChange)="onColorSliderChange(selectedColor, $event)">
+    <ion-range #pickColorColorSlider
+               class="color-slider"
+               [value]="colorSliderConfig.value"
+               [min]="colorSliderConfig.min"
+               [max]="colorSliderConfig.max"
+               (ionChange)="onColorSliderChange(selectedColor, $event)">
     </ion-range>
 </ion-content>
 
 <ion-footer>
-    <ion-button [mode]="'ios'" (click)="dismiss()">Close</ion-button>
+    <ion-button (click)="dismiss()">Close</ion-button>
 </ion-footer>

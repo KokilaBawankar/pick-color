@@ -46,10 +46,25 @@ ion-modal {
     }
     &.pick-color-modal {
       .modal-wrapper {
-        height: 300px;
+        height: 320px;
         position: relative;
-        top: 31%;
         transform: translateY(-50%)!important;
       }
     }
+
+  &.pick-color-modal-top{
+    .modal-wrapper {
+      top: -30%;
+    }
+  }
+  &.pick-color-modal-bottom{
+    .modal-wrapper {
+      top: 30%;
+    }
+  }
+  &.pick-color-modal-center{
+    .modal-wrapper {
+      top: 0;
+    }
+  }
 }

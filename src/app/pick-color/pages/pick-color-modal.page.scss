@@ -37,4 +37,7 @@
   --bar-background-active: none;
   --bar-border-radius: 5px;
   --bar-height: 10px;
+  ion-range:disabled{
+    --bar-background-active: none;
+  }
 }
