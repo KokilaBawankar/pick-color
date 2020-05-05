@@ -43,9 +43,9 @@ export class PickColorDirective implements OnInit {
             backdropDismiss: false,
             showBackdrop: true,
             componentProps: {
-                onColorPickerOpen: this.colorPickerOpen,
-                onColorPickerClose: this.colorPickerClose,
-                onColorChange: this.colorChange,
+                colorPickerOpen: this.colorPickerOpen,
+                colorPickerClose: this.colorPickerClose,
+                colorChange: this.colorChange,
                 colors: this.colors
             },
             cssClass: ['pick-color-modal', 'pick-color-modal-' + this.position.trim()]

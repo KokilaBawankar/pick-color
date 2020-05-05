@@ -6,6 +6,7 @@ import {RouterModule} from '@angular/router';
 
 import {HomePage} from './home.page';
 import {PickColorModule} from '../pick-color/pick-color.module';
+import {IonicColorPickerModule} from 'ionic-color-picker';
 
 @NgModule({
     imports: [
@@ -18,7 +19,8 @@ import {PickColorModule} from '../pick-color/pick-color.module';
                 component: HomePage
             }
         ]),
-        PickColorModule
+        PickColorModule,
+        IonicColorPickerModule
     ],
     declarations: [HomePage]
 })

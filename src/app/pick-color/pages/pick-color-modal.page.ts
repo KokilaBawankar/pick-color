@@ -19,16 +19,14 @@ import {ColorChangeModel, ColorPickerCloseModel, ColorPickerOpenModel} from '../
 })
 export class PickColorModalPage implements OnInit, OnDestroy {
 
-    // tslint:disable-next-line:no-output-on-prefix
-    @Output() onColorPickerOpen: EventEmitter<ColorPickerOpenModel> = new EventEmitter();
-    // tslint:disable-next-line:no-output-on-prefix
-    @Output() onColorPickerClose: EventEmitter<ColorPickerCloseModel> = new EventEmitter();
-    // tslint:disable-next-line:no-output-on-prefix
-    @Output() onColorChange: EventEmitter<ColorChangeModel> = new EventEmitter();
+    @Output() colorPickerOpen: EventEmitter<ColorPickerOpenModel> = new EventEmitter();
+    @Output() colorPickerClose: EventEmitter<ColorPickerCloseModel> = new EventEmitter();
+    @Output() colorChange: EventEmitter<ColorChangeModel> = new EventEmitter();
+
+    @ViewChild('colorSlider', {static: true}) colorSlider: ElementRef;
 
     colors: string[] = [];
     selectedColor: string;
-    @ViewChild('pickColorColorSlider', {static: true}) colorSlider: ElementRef;
     colorSliderConfig = {
         min: -100,
         max: 100,
@@ -43,7 +41,7 @@ export class PickColorModalPage implements OnInit, OnDestroy {
     ngOnInit() {
         // @ts-ignore
         this.renderer2.setAttribute(this.colorSlider.el, 'disabled', 'true');
-        this.onColorPickerOpen.emit({isColorPickerOpen: true});
+        this.colorPickerOpen.emit({isColorPickerOpen: true});
     }
 
     dismiss() {
@@ -51,7 +49,7 @@ export class PickColorModalPage implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.onColorPickerClose.emit({isColorPickerClose: true});
+        this.colorPickerClose.emit({isColorPickerClose: true});
     }
 
     setSelectedColor(color: string) {
@@ -59,7 +57,7 @@ export class PickColorModalPage implements OnInit, OnDestroy {
         this.setColorSliderBackgroundGradient(color);
         // @ts-ignore
         this.renderer2.setAttribute(this.colorSlider.el, 'value', this.colorSliderConfig.value.toString());
-        this.onColorChange.emit({color});
+        this.colorChange.emit({color});
         if (this.selectedColor === 'none') {
             // @ts-ignore
             this.renderer2.setAttribute(this.colorSlider.el, 'disabled', 'true');
@@ -111,7 +109,6 @@ export class PickColorModalPage implements OnInit, OnDestroy {
         const BB = ((B.toString(16).length === 1) ? '0' + B.toString(16) : B.toString(16));
 
         return (usePound ? '#' : '') + RR + GG + BB;
-
     }
 
     setColorSliderBackgroundGradient(color: string) {
@@ -131,12 +128,6 @@ export class PickColorModalPage implements OnInit, OnDestroy {
     }
 
     onColorSliderChange(selectedColor: string, $event: CustomEvent<any>) {
-        this.onColorChange.emit({color: this.adjustColor(selectedColor, $event)});
+        this.colorChange.emit({color: this.adjustColor(selectedColor, $event)});
     }
-
-    /*adjustColor(color: string, customEvent: CustomEvent) {
-      console.log(customEvent.detail.value);
-      console.log( '#' + color.replace(/^#/, '').replace(
-          /../g, clr => ('0' + Math.min(255, Math.max(0, parseInt(clr, 16) + customEvent.detail.value)).toString(16)).substr(-2)));
-  }*/
 }

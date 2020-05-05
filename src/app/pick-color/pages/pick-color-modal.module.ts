@@ -9,6 +9,7 @@ import { PickColorModalPage } from './pick-color-modal.page';
     CommonModule,
     IonicModule
   ],
+  entryComponents: [PickColorModalPage],
   declarations: [PickColorModalPage]
 })
 export class PickColorModalPageModule {}
