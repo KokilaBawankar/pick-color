@@ -1,4 +1,4 @@
-import {Directive, ElementRef, EventEmitter, HostListener, Input, Output} from '@angular/core';
+import {Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {PickColorModalPage} from '../pages/pick-color-modal.page';
 
@@ -17,14 +17,11 @@ export interface ColorChangeModel {
 @Directive({
     selector: '[appPickColor]'
 })
-export class PickColorDirective {
+export class PickColorDirective implements OnInit {
 
-    // tslint:disable-next-line:no-output-on-prefix
-    @Output() onColorPickerOpen: EventEmitter<ColorPickerOpenModel> = new EventEmitter();
-    // tslint:disable-next-line:no-output-on-prefix
-    @Output() onColorPickerClose: EventEmitter<ColorPickerCloseModel> = new EventEmitter();
-    // tslint:disable-next-line:no-output-on-prefix
-    @Output() onColorChange: EventEmitter<ColorChangeModel> = new EventEmitter();
+    @Output() colorPickerOpen: EventEmitter<ColorPickerOpenModel> = new EventEmitter();
+    @Output() colorPickerClose: EventEmitter<ColorPickerCloseModel> = new EventEmitter();
+    @Output() colorChange: EventEmitter<ColorChangeModel> = new EventEmitter();
 
     @Input() colors: string[] = [
         '#C0392B', '#E74C3C', '#9B59B6', '#8E44AD', '#2980B9', '#3498DB', '#1ABC9C', '#16A085', '#27AE60', '#2ECC71',
@@ -35,6 +32,10 @@ export class PickColorDirective {
                 private modalController: ModalController) {
     }
 
+    ngOnInit(): void {
+        this.generateColors();
+    }
+
     @HostListener('click', ['$event'])
     async openColorPicker(event) {
         const modal = await this.modalController.create({
@@ -42,13 +43,17 @@ export class PickColorDirective {
             backdropDismiss: false,
             showBackdrop: true,
             componentProps: {
-                onColorPickerOpen: this.onColorPickerOpen,
-                onColorPickerClose: this.onColorPickerClose,
-                onColorChange: this.onColorChange,
+                onColorPickerOpen: this.colorPickerOpen,
+                onColorPickerClose: this.colorPickerClose,
+                onColorChange: this.colorChange,
                 colors: this.colors
             },
             cssClass: ['pick-color-modal', 'pick-color-modal-' + this.position.trim()]
         });
         await modal.present();
+    }
+
+    generateColors() {
+
     }
 }
