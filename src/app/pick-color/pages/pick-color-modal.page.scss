@@ -18,16 +18,17 @@
   background-color: #f2f0f0;
   border-radius: 50%;
   box-shadow: 2px 3px 5px grey;
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
 }
 
 .cp-color-bar-color-none-line {
   border-bottom: 2px solid #FF9800;
-  height: 48px;
+  height: 41px;
   position: relative;
-  transform: translateY(-16px) translateX(16px) rotate(40deg);
-  width: 48px;
+  -webkit-transform: translateY(-16px) translateX(16px) rotate(40deg);
+  transform: translateY(-15px) translateX(12px) rotate(40deg);
+  width: 41px;
 }
 
 .cp-color-bar-color-none {
@@ -39,6 +40,7 @@
   --bar-background-active: none;
   --bar-border-radius: 5px;
   --bar-height: 10px;
+  margin-top: 10px;
 }
 
 ion-range:disabled {

@@ -24,47 +24,5 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
-
-ion-modal {
-  padding: 10px;
-  ion-backdrop {
-    visibility: visible;
-    z-index: 0;
-  }
-    .modal-wrapper {
-      border-radius: 5px;
-      .scroll-content {
-        background-color: white;
-      }
-      ion-footer{
-        display: flex;
-        justify-content: flex-end;
-        ion-button{
-          margin: 10px;
-        }
-      }
-    }
-    &.pick-color-modal {
-      .modal-wrapper {
-        height: 320px;
-        position: relative;
-        transform: translateY(-50%)!important;
-      }
-    }
-
-  &.pick-color-modal-top{
-    .modal-wrapper {
-      top: -30%;
-    }
-  }
-  &.pick-color-modal-bottom{
-    .modal-wrapper {
-      top: 30%;
-    }
-  }
-  &.pick-color-modal-center{
-    .modal-wrapper {
-      top: 0;
-    }
-  }
-}
+//@import "assets/styles";
+@import "~ionic-color-picker/dist/assets/css/styles";

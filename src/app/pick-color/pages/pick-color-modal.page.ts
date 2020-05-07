@@ -44,10 +44,6 @@ export class PickColorModalPage implements OnInit, OnDestroy {
         this.colorPickerOpen.emit({isColorPickerOpen: true});
     }
 
-    dismiss() {
-        this.modalController.dismiss();
-    }
-
     ngOnDestroy(): void {
         this.colorPickerClose.emit({isColorPickerClose: true});
     }
